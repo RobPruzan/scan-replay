@@ -3,6 +3,7 @@
 
 import { sql } from "drizzle-orm";
 import { index, int, sqliteTableCreator, text } from "drizzle-orm/sqlite-core";
+import { RRWebEvent } from "../../app/api/rrweb/route";
 
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
@@ -12,19 +13,9 @@ import { index, int, sqliteTableCreator, text } from "drizzle-orm/sqlite-core";
  */
 export const createTable = sqliteTableCreator((name) => `scan-replay_${name}`);
 
-export const posts = createTable(
-  "post",
-  {
-    id: int("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-    name: text("name", { length: 256 }),
-    createdAt: int("created_at", { mode: "timestamp" })
-      .default(sql`(unixepoch())`)
-      .notNull(),
-    updatedAt: int("updated_at", { mode: "timestamp" }).$onUpdate(
-      () => new Date()
-    ),
-  },
-  (example) => ({
-    nameIndex: index("name_idx").on(example.name),
-  })
-);
+export const sessionReplay = createTable("sessionReplay", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  events: text("events", { mode: "json" }).$type<RRWebEvent[]>().notNull(),
+});

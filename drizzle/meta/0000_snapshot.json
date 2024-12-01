@@ -1,0 +1,40 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "9777977a-fc64-46d9-ab3e-fa590b87c7bf",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "scan-replay_sessionReplay": {
+      "name": "scan-replay_sessionReplay",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "events": {
+          "name": "events",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
+  }
+}
